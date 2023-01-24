@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    environment {
+        DOTNET_CLI_HOME = '/tmp/dotnet_cli_home'
+        XDG_DATA_HOME = '/tmp'
+    }
+
     stages {
         stage('Build') {
             stages {
