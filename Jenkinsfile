@@ -25,8 +25,11 @@ pipeline {
                     }
                     steps {
                         echo 'Building npm'
-                        npm install
-                        npm run build
+                        script{
+                            npm install
+                            npm run build
+                        }
+                        
                     }
                 }
             }
