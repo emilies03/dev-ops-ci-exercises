@@ -21,8 +21,8 @@ jobs:
     - name: run c# tests
       run: dotnt tests
     - name: run TypeScript tests
-        working-directory: ./DotnetTemplate.Web
-        run: npm t
+      working-directory: ./DotnetTemplate.Web
+      run: npm t
     - name: run linting
-        working-directory: ./DotnetTemplate.Web
-        run: npm run lint    
+      working-directory: ./DotnetTemplate.Web
+      run: npm run lint    
