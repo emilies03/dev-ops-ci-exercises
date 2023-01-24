@@ -25,4 +25,10 @@ jobs:
       run: npm t
     - name: run linting
       working-directory: ./DotnetTemplate.Web
-      run: npm run lint    
+      run: npm run lint
+    - name: Slack Notification
+    - uses: tokorom/action-slack-incoming-webhook@main
+      env:
+        INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      with:
+        text: Hello, Slack!
