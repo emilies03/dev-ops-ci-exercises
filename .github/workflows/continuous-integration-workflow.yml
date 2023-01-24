@@ -55,9 +55,9 @@ jobs:
               ]
             }
           ]
-      if: failure()   
-      with:
-        text: Piepline failed! 
-      if: cancelled()   
-      with:
-        text: Piepline cancelled! 
+    if: failure()   
+    with:
+      text: Piepline failed! 
+    if: cancelled()   
+    with:
+      text: Piepline cancelled! 
