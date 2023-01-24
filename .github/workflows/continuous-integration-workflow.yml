@@ -18,3 +18,11 @@ jobs:
       run: |
         npm install
         npm run build
+    - name: run c# tests
+      run: dotnt tests
+    - name: run TypeScript tests
+        working-directory: ./DotnetTemplate.Web
+        run: npm t
+    - name: run linting
+        working-directory: ./DotnetTemplate.Web
+        run: npm run lint    
