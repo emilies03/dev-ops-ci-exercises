@@ -28,7 +28,7 @@ jobs:
       run: npm run lint
     - name: Slack Notification
       uses: tokorom/action-slack-incoming-webhook@main
-       env:
+      env:
         INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
       if: success()
       with:
