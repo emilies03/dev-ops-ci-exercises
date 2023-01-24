@@ -19,7 +19,7 @@ jobs:
         npm install
         npm run build
     - name: run c# tests
-      run: dotnet tests
+      run: dotnet test
     - name: run TypeScript tests
       working-directory: ./DotnetTemplate.Web
       run: npm t
