@@ -57,7 +57,7 @@ jobs:
   #         ]
   build-and-push-docker-image:
     name: Docker Build, Tag & Publish
-    needs: build-and-test
+    # needs: build-and-test
     if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     steps:
@@ -75,6 +75,7 @@ jobs:
           repoOwner: ${{ secrets.DOCKERHUB_USERNAME }}
           repository:  dotnettemplate
           tag: ${{github.ref_name}}
+  
   refresh-azure-image:
     name: Refresh Azure Image
     needs: build-and-push-docker-image
