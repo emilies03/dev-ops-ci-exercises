@@ -83,4 +83,4 @@ jobs:
     steps:
       - name: Curl Azure webhook
         run: |
-          curl --fail -dH -X POST "${{ secrets.AZURE_WEBHOOK }}"
+          curl --fail -dH -X POST '${{ secrets.AZURE_WEBHOOK }}'
