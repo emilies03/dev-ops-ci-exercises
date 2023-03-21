@@ -10,7 +10,7 @@
         {
             FirstPageItems = new[]
             {
-                "Item 1",
+                "Emilie's Item 1",
                 "Item 2",
                 "Item 3"
             };
