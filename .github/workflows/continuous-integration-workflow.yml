@@ -2,61 +2,62 @@ name: Continuous Integration
 on: [push]                      # Will make the workflow run every time you push to any branch
 
 jobs:
-  # build:
-  #   name: Build code
-  #   runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
-  #   steps:
-  #   - uses: actions/checkout@v2 # Adds a step to checkout the repository code
-  #   - name: Set up .NET
-  #     uses: xt0rted/setup-dotnet@v1.0.0
-  #     with:
-  #       dotnet-version: 6.0.201
-  #   - uses: actions/setup-node@v3
-  #   - run: dotnet build
-  #   - name: install and build npm
-  #     working-directory: ./DotnetTemplate.Web
-  #     run: |
-  #       npm install
-  #       npm run build
-  #   - name: run c# tests
-  #     run: dotnet test
-  #   - name: run TypeScript tests
-  #     working-directory: ./DotnetTemplate.Web
-  #     run: npm t
-  #   - name: run linting
-  #     working-directory: ./DotnetTemplate.Web
-  #     run: npm run lint
-  #   - name: Slack Notification
-  #     uses: tokorom/action-slack-incoming-webhook@main
-  #     env:
-  #       INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
-  #     if: success()
-  #     with:
-  #       text: Successfully automated deployment.
-  #       attachments: |
-  #         [
-  #           {
-  #             "color": "good",
-  #             "author_name": "${{ github.actor }}",
-  #             "author_icon": "${{ github.event.sender.avatar_url }}",
-  #             "fields": [
-  #               {
-  #                 "title": "Commit Message",
-  #                 "value": "${{ github.event.head_commit.message }}"
-  #               },
-  #               {
-  #                 "title": "GitHub Actions URL",
-  #                 "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
-  #               },
-  #               {
-  #                 "title": "Compare URL",
-  #                 "value": "${{ github.event.compare }}"
-  #               }
-  #             ]
-  #           }
-  #         ]
+  build:
+    name: Build code
+    runs-on: ubuntu-latest      # Sets the build environment a machine with the latest Ubuntu installed
+    steps:
+    - uses: actions/checkout@v2 # Adds a step to checkout the repository code
+    - name: Set up .NET
+      uses: xt0rted/setup-dotnet@v1.0.0
+      with:
+        dotnet-version: 6.0.201
+    - uses: actions/setup-node@v3
+    - run: dotnet build
+    - name: install and build npm
+      working-directory: ./DotnetTemplate.Web
+      run: |
+        npm install
+        npm run build
+    - name: run c# tests
+      run: dotnet test
+    - name: run TypeScript tests
+      working-directory: ./DotnetTemplate.Web
+      run: npm t
+    - name: run linting
+      working-directory: ./DotnetTemplate.Web
+      run: npm run lint
+    - name: Slack Notification
+      uses: tokorom/action-slack-incoming-webhook@main
+      env:
+        INCOMING_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: success()
+      with:
+        text: Successfully automated deployment.
+        attachments: |
+          [
+            {
+              "color": "good",
+              "author_name": "${{ github.actor }}",
+              "author_icon": "${{ github.event.sender.avatar_url }}",
+              "fields": [
+                {
+                  "title": "Commit Message",
+                  "value": "${{ github.event.head_commit.message }}"
+                },
+                {
+                  "title": "GitHub Actions URL",
+                  "value": "${{ github.event.repository.url }}/actions/runs/${{ github.run_id }}"
+                },
+                {
+                  "title": "Compare URL",
+                  "value": "${{ github.event.compare }}"
+                }
+              ]
+            }
+          ]
   build-and-push-image:
-    # needs: build
+    needs: build
+    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
     name: Docker Build, Tag & Publish
     steps:
@@ -73,4 +74,4 @@ jobs:
           file: Dockerfile
           repoOwner: ${{ secrets.DOCKERHUB_USERNAME }}
           repository:  dotnettemplate
-          tag: 1.0.0
+          tag: ${{github.ref}}
