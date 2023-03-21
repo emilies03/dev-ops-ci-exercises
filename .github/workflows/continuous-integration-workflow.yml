@@ -74,4 +74,4 @@ jobs:
           file: Dockerfile
           repoOwner: ${{ secrets.DOCKERHUB_USERNAME }}
           repository:  dotnettemplate
-          tag: ${{github.ref}}
+          tag: ${{github.ref_name}}
