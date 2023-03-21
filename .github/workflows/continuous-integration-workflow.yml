@@ -60,6 +60,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Docker Build, Tag & Publish
     steps:
+      - name: Git Checkout Code
+          uses: actions/checkout@v1
+          id: git_checkout
+
       - name: Build, Tag & Publish Image to DockerHub
         uses: dinushchathurya/build-tag-push-action@v1.2.1
         with:
