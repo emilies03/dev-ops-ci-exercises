@@ -68,5 +68,5 @@ jobs:
           context: .
           file: Dockerfile
           repoOwner: ${{ secrets.DOCKERHUB_USERNAME }}
-          repository:  nodejs-docker
+          repository:  dotnettemplate
           tag: 1.0.0
